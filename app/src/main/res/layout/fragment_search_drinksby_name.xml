@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".SearchDrinksbyName" android:orientation="vertical">
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            android:id="@+id/searchbyname" android:paddingTop="20dp" android:layout_marginTop="60dp"/>
+    <Button
+            android:text="Search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="getDrinkDatabyName"
+            android:id="@+id/searchbynameBTN"
+    />
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="3"
+                 android:id="@+id/searchbynameresults"
+    ></FrameLayout>
+    <!--<fragment android:layout_width="match_parent"-->
+              <!--android:layout_height="wrap_content"-->
+              <!--android:layout_weight="1"-->
+              <!--android:id="@+id/fragment"-->
+              <!--android:name="com.example.cocktailcompanion.SearchDrinksList"-->
+    <!--/>-->
+
+</LinearLayout>

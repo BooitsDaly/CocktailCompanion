@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <item android:title="Search">
+        <menu>
+            <item
+                    android:id="@+id/search_cocktail"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="Cocktail Names"/>
+            <item
+                    android:id="@+id/search_ingredient"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Ingredient Name"/>
+            <item
+                    android:id="@+id/search_by_ingredient"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Search By Ingredient"/>
+        </menu>
+    </item>
+    <item android:title="Filter">
+        <menu>
+            <item
+                    android:id="@+id/filter_alcahol"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="Alcahol"/>
+            <item
+                    android:id="@+id/filter_category"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Category"/>
+            <item
+                    android:id="@+id/filter_glass"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Glass"/>
+        </menu>
+    </item>
+    <item android:title="Random">
+        <menu>
+            <item
+                    android:id="@+id/random_cocktail"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Get a random Cocktail"/>
+        </menu>
+    </item>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/my_favorites"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="My Favorites"/>
+        <item
+            android:id="@+id/to_try"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="To Try List"/>
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="About"/>
+    </group>
+
+</menu>
