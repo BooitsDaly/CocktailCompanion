@@ -22,16 +22,8 @@ class MyDrinksRecyclerViewAdapter(
     private val mListener: OnListFragmentInteractionListener?
 ) : RecyclerView.Adapter<MyDrinksRecyclerViewAdapter.ViewHolder>() {
 
-    //private val mOnClickListener: View.OnClickListener
-
     init {
-        println(mValues)
-//        mOnClickListener = View.OnClickListener { v ->
-//            val item = v.tag as DummyItem
-//            // Notify the active callbacks interface (the activity, if the fragment is attached to
-//            // one) that an item has been selected.
-//            mListener?.onListFragmentInteraction(item)
-//        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -24,7 +24,11 @@
             <item
                     android:id="@+id/filter_alcahol"
                     android:icon="@drawable/ic_menu_share"
-                    android:title="Alcahol"/>
+                    android:title="Alcoholic"/>
+            <item
+                    android:id="@+id/filter_nonalcahol"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="Non-Alcoholic"/>
             <item
                     android:id="@+id/filter_category"
                     android:icon="@drawable/ic_menu_send"

@@ -1,7 +1,7 @@
 package com.example.cocktailcompanion
 
+import android.app.Activity
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -9,24 +9,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
+import android.widget.AdapterView
+import androidx.core.view.get
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_filterby_ingredient.*
+import kotlinx.android.synthetic.main.fragment_filterby_ingredient.view.*
 import kotlinx.android.synthetic.main.fragment_search_drinksby_name.*
 import okhttp3.Call
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
-import java.util.*
-import kotlin.concurrent.schedule
-import com.example.cocktailcompanion.Drinks
 import kotlinx.android.synthetic.main.fragment_searchby_ingredient.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val client = OkHttpClient()
+    private val instance: MainActivity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,12 +94,67 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.search_by_ingredient -> {
-
+                //create the search fragment
+                val fragment = FilterbyIngredient()
+                //inflate it
+                supportFragmentManager.beginTransaction().replace(R.id.content, fragment).commit()
             }
 
             //all of the filter terms
             R.id.filter_alcahol ->{
+                val request = Request.Builder()
+                    .url("https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic")
+                    .build()
 
+                client.newCall(request).enqueue(object : okhttp3.Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        println("Something went wrong: API call failed")
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        var responseData = response.body()?.string()
+                        println(responseData)
+                        val gson = GsonBuilder().create()
+                        val feed = gson.fromJson(responseData, DrinksFeed::class.java)
+                        println(feed.toString())
+                        if(feed.drinks == null){
+                            return//Toast.makeText(this@MainActivity, "Nothing found for that search", Toast.LENGTH_LONG).show()
+                        }else{
+                            val fragment = IngredientsListFragment(feed.drinks)
+                            supportFragmentManager.beginTransaction().replace(R.id.content,fragment).commit()
+                        }
+
+
+                    }
+                })
+
+            }
+            R.id.filter_nonalcahol->{
+                val request = Request.Builder()
+                    .url("https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic")
+                    .build()
+
+                client.newCall(request).enqueue(object : okhttp3.Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        println("Something went wrong: API call failed")
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        var responseData = response.body()?.string()
+                        println(responseData)
+                        val gson = GsonBuilder().create()
+                        val feed = gson.fromJson(responseData, DrinksFeed::class.java)
+                        println(feed.toString())
+                        if(feed.drinks == null){
+                            return//Toast.makeText(this@MainActivity, "Nothing found for that search", Toast.LENGTH_LONG).show()
+                        }else{
+                            val fragment = IngredientsListFragment(feed.drinks)
+                            supportFragmentManager.beginTransaction().replace(R.id.content,fragment).commit()
+                        }
+
+
+                    }
+                })
             }
             R.id.filter_category->{
 
@@ -207,12 +263,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     if(feed.drinks == null){
                         return//Toast.makeText(this@MainActivity, "Nothing found for that search", Toast.LENGTH_LONG).show()
                     }else{
-                        println("*********" + feed.drinks.size + "************")
-
-                        //format the data
-
-                        //set the data
-
                         //inflate the recycler view
                         val fragment = DrinksFragment(feed)
                         supportFragmentManager.beginTransaction().replace(R.id.searchbynameresults, fragment).commit()
@@ -223,6 +273,46 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             })
         }
 
+    }
+    fun IngredientSelected(view:View){
+        println("${spinner.selectedItemPosition} was selected")
+        val term = spinner.getItemAtPosition(spinner.selectedItemPosition)
+        println(term)
+        if(!term.equals("") && term != null){
+            val request = Request.Builder()
+                .url("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=$term")
+                .build()
+
+            client.newCall(request).enqueue(object : okhttp3.Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    println("Something went wrong: API call failed")
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    var responseData = response.body()?.string()
+                    println(responseData)
+                    val gson = GsonBuilder().create()
+                    val feed = gson.fromJson(responseData, DrinksFeed::class.java)
+                    println(feed.toString())
+                    if(feed.drinks == null){
+                        return//Toast.makeText(this@MainActivity, "Nothing found for that search", Toast.LENGTH_LONG).show()
+                    }else{
+                        //send data to listview fragment and inflate it
+
+
+                        println("*********" + feed.drinks.size + "************")
+                        //inflate the recycler view
+                        //val mActivity = MainActivity()
+
+                        //view.inflatebyIngredients(feed.drinks)
+                        val fragment = IngredientsListFragment(feed.drinks)
+                        supportFragmentManager.beginTransaction().replace(com.example.cocktailcompanion.R.id.filterbyingredientresults,fragment).commit()
+                    }
+
+
+                }
+            })
+        }
     }
     fun getIngredient(view: View){
         val term = searchIngredient.text
@@ -257,16 +347,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
             })
         }
-        //check to see that the text isnt blant
-        //check to see that the response isnt blank
-        //query the api
-        //place the data on the fragment
-
     }
 }
 class DrinksFeed(val drinks:List<Drinks>)
 class IngredientsFeed(val ingredients:List<Ingredients>)
 class Ingredients(val idIngredient:Int?, val strIngredient: String?,
              val strDescription: String?, val strType: String?)
+
+
 
 
