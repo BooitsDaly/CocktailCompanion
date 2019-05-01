@@ -124,7 +124,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             //about
             R.id.about->{
-
+                //create the search fragment
+                val fragment = About()
+                //inflate it
+                supportFragmentManager.beginTransaction().replace(R.id.content, fragment).commit()
             }
         }
 
