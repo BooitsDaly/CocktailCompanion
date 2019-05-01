@@ -3,15 +3,20 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              tools:context=".SearchbyIngredient" android:orientation="vertical">
+              tools:context=".SearchbyIngredient" android:orientation="vertical" android:layout_marginTop="25dp">
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/searchbyIngredient" android:layout_marginTop="20dp"/>
+            android:id="@+id/searchIngredient" android:layout_marginTop="20dp"/>
     <Button
             android:text="@android:string/search_go"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/searchByIngredientBTN"/>
+            android:onClick="getIngredient"
+            android:layout_height="wrap_content" android:id="@+id/searchIngredientBTN"/>
+    <TextView
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="620dp" android:id="@+id/getIngredients" android:layout_margin="10dp"/>
 </LinearLayout>

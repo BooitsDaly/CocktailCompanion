@@ -22,6 +22,7 @@ import java.io.IOException
 import java.util.*
 import kotlin.concurrent.schedule
 import com.example.cocktailcompanion.Drinks
+import kotlinx.android.synthetic.main.fragment_searchby_ingredient.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -220,13 +221,49 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
     }
-    fun getIngredient(){
+    fun getIngredient(view: View){
+        val term = searchIngredient.text
+        println(term)
+        if(!term.equals("") && term != null){
+            val request = Request.Builder()
+                .url("https://www.thecocktaildb.com/api/json/v1/1/search.php?i=$term")
+                .build()
+
+            client.newCall(request).enqueue(object : okhttp3.Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    println("Something went wrong: API call failed")
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    var responseData = response.body()?.string()
+                    println(responseData)
+                    val gson = GsonBuilder().create()
+                    val feed = gson.fromJson(responseData, IngredientsFeed::class.java)
+                    println(feed.toString())
+                    if(feed.ingredients == null){
+                        return//Toast.makeText(this@MainActivity, "Nothing found for that search", Toast.LENGTH_LONG).show()
+                    }else{
+                        println("*********" + feed.ingredients.size + "************")
+                        val textString = "Ingredient: ${feed.ingredients.get(0).strIngredient}\n" +
+                                "Description: ${feed.ingredients.get(0).strDescription}\n" +
+                                "Type of Ingredient: ${feed.ingredients.get(0).strType}"
+                        getIngredients.text = textString
+                    }
+
+
+                }
+            })
+        }
         //check to see that the text isnt blant
         //check to see that the response isnt blank
         //query the api
-        //inflate the fragment
+        //place the data on the fragment
+
     }
 }
 class DrinksFeed(val drinks:List<Drinks>)
+class IngredientsFeed(val ingredients:List<Ingredients>)
+class Ingredients(val idIngredient:Int?, val strIngredient: String?,
+             val strDescription: String?, val strType: String?)
 
 
