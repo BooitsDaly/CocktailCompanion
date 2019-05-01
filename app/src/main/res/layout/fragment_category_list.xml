@@ -12,7 +12,8 @@
             android:text="Select"
             android:layout_width="match_parent"
             android:onClick="getCatagoryData"
-            android:layout_height="wrap_content" android:id="@+id/filter_category_selected"/>
+            android:layout_height="wrap_content" android:id="@+id/filter_category_selected"
+            android:fontFamily="cursive"/>
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:layout_weight="3"

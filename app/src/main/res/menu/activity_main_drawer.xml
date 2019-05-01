@@ -7,7 +7,7 @@
         <menu>
             <item
                     android:id="@+id/search_cocktail"
-                    android:icon="@drawable/ic_menu_share"
+                    android:icon="@drawable/ic_menu_send"
                     android:title="Cocktail Names"/>
             <item
                     android:id="@+id/search_ingredient"
@@ -23,11 +23,11 @@
         <menu>
             <item
                     android:id="@+id/filter_alcahol"
-                    android:icon="@drawable/ic_menu_share"
+                    android:icon="@drawable/ic_menu_send"
                     android:title="Alcoholic"/>
             <item
                     android:id="@+id/filter_nonalcahol"
-                    android:icon="@drawable/ic_menu_share"
+                    android:icon="@drawable/ic_menu_send"
                     android:title="Non-Alcoholic"/>
             <item
                     android:id="@+id/filter_category"
@@ -51,7 +51,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/my_favorites"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="My Favorites"/>
         <item
             android:id="@+id/to_try"
@@ -59,7 +59,7 @@
             android:title="To Try List"/>
         <item
             android:id="@+id/about"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_send"
             android:title="About"/>
     </group>
 

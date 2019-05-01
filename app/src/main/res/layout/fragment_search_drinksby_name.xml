@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:onClick="getDrinkDatabyName"
             android:id="@+id/searchbynameBTN"
-    />
+            android:fontFamily="cursive"/>
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:layout_weight="3"

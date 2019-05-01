@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".FilterGlass">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".CategoryList" android:orientation="vertical">
+    <Spinner
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
-
-</FrameLayout>
+            android:layout_height="wrap_content" android:id="@+id/filter_glass_spinner"
+            android:layout_marginTop="60dp"/>
+    <Button
+            android:text="Select"
+            android:layout_width="match_parent"
+            android:onClick="getGlassData"
+            android:layout_height="wrap_content" android:id="@+id/filter_glass_selected" android:fontFamily="cursive"/>
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="3"
+                 android:id="@+id/filter_glass_dataresults"
+    ></FrameLayout>
+</LinearLayout>

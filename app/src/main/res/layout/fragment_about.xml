@@ -7,17 +7,23 @@
     <TextView
             android:text="Cocktail Companion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView2" android:layout_marginTop="30dp"/>
-    <ImageView
-            android:src="@drawable/soccer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/imageView3"/>
+            android:layout_height="wrap_content" android:id="@+id/textView2"
+            android:layout_marginTop="100dp" android:layout_marginLeft="50dp" android:textSize="24sp"
+            android:fontFamily="cursive"/>
     <TextView
             android:text="By Caitlyn Daly"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView3"/>
+            android:layout_marginLeft="50dp"
+            android:layout_height="wrap_content" android:id="@+id/textView3" android:textSize="18sp"
+            android:fontFamily="cursive"/>
     <TextView
             android:text="ISTE-456"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView4"/>
+            android:layout_marginLeft="50dp"
+            android:layout_height="wrap_content" android:id="@+id/textView4" android:textSize="18sp"
+            android:fontFamily="cursive"/>
+    <ImageView
+            android:src="@drawable/cocktail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/imageView3"/>
 </LinearLayout>

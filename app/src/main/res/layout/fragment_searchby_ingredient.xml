@@ -14,9 +14,10 @@
             android:text="@android:string/search_go"
             android:layout_width="match_parent"
             android:onClick="getIngredient"
-            android:layout_height="wrap_content" android:id="@+id/searchIngredientBTN"/>
+            android:layout_height="wrap_content" android:id="@+id/searchIngredientBTN" android:fontFamily="cursive"/>
     <TextView
             android:text=""
             android:layout_width="match_parent"
-            android:layout_height="620dp" android:id="@+id/getIngredients" android:layout_margin="10dp"/>
+            android:layout_height="620dp" android:id="@+id/getIngredients" android:layout_margin="10dp"
+            android:fontFamily="cursive" android:textSize="24sp"/>
 </LinearLayout>

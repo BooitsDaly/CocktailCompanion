@@ -13,7 +13,7 @@
             android:text="Select"
             android:layout_width="match_parent"
             android:onClick="IngredientSelected"
-            android:layout_height="wrap_content" android:id="@+id/button"/>
+            android:layout_height="wrap_content" android:id="@+id/button" android:fontFamily="cursive"/>
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:layout_weight="3"

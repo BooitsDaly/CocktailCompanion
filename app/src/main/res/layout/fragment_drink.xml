@@ -16,7 +16,8 @@
             android:layout_margin="10dp"
             android:id="@+id/drink_name"
             android:textSize="36sp"
-            android:textColor="@android:color/black" android:layout_marginTop="20dp" android:paddingTop="20dp"/>
+            android:textColor="@android:color/black" android:layout_marginTop="20dp" android:paddingTop="20dp"
+            android:fontFamily="cursive"/>
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/drink_instructions" android:layout_weight="0"/>
@@ -37,7 +38,8 @@
             android:text="Get Another"
             android:layout_width="match_parent"
             android:onClick="getRandom"
-            android:layout_height="wrap_content" android:id="@+id/getRadom" android:layout_weight="0"/>
+            android:layout_height="wrap_content" android:id="@+id/getRadom" android:layout_weight="0"
+            android:fontFamily="cursive"/>
     <!-- TODO: Update blank fragment layout -->
 
 </LinearLayout>
