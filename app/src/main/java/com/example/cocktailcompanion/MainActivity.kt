@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -84,6 +85,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.search_ingredient ->{
+                //create the search fragment
+                val fragment = SearchbyIngredient()
+                //inflate it
+                supportFragmentManager.beginTransaction().replace(R.id.content, fragment).commit()
 
             }
             R.id.search_by_ingredient -> {
@@ -194,20 +199,32 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     var responseData = response.body()?.string()
                     val gson = GsonBuilder().create()
                     val feed = gson.fromJson(responseData, DrinksFeed::class.java)
-                    println("*********" + feed.drinks.get(0).idDrink + "************")
+                    println(feed.drinks)
+                    if(feed.drinks == null){
+                        return//Toast.makeText(this@MainActivity, "Nothing found for that search", Toast.LENGTH_LONG).show()
+                    }else{
+                        println("*********" + feed.drinks.size + "************")
 
-                    //format the data
+                        //format the data
 
-                    //set the data
-                    args.putString(DrinksFragment.drinks, responseData)
-                    //inflate the recycler view
-                    val fragment = DrinksFragment()
-                    supportFragmentManager.beginTransaction().replace(R.id.searchbynameresults, fragment).commit()
+                        //set the data
+
+                        //inflate the recycler view
+                        val fragment = DrinksFragment(feed)
+                        supportFragmentManager.beginTransaction().replace(R.id.searchbynameresults, fragment).commit()
+                    }
+
 
                 }
             })
         }
 
+    }
+    fun getIngredient(){
+        //check to see that the text isnt blant
+        //check to see that the response isnt blank
+        //query the api
+        //inflate the fragment
     }
 }
 class DrinksFeed(val drinks:List<Drinks>)

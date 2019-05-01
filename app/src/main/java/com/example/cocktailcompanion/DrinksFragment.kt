@@ -10,27 +10,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import com.example.cocktailcompanion.dummy.DummyContent
-import com.example.cocktailcompanion.dummy.DummyContent.DummyItem
 
 /**
  * A fragment representing a list of Items.
  * Activities containing this fragment MUST implement the
  * [DrinksFragment.OnListFragmentInteractionListener] interface.
  */
-class DrinksFragment : Fragment() {
-
-    companion object {
-        val drinks = "drinks"
-    }
+class DrinksFragment(feed: DrinksFeed) : Fragment() {
+    private val data = feed
     // TODO: Customize parameters
     private var columnCount = 1
 
     private var listener: OnListFragmentInteractionListener? = null
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +36,7 @@ class DrinksFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyDrinksRecyclerViewAdapter(DummyContent.ITEMS, listener)
+                adapter = MyDrinksRecyclerViewAdapter(data.drinks, listener)
             }
         }
         return view
@@ -64,6 +55,6 @@ class DrinksFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
+        //fun onListFragmentInteraction(item: DummyItem?)
     }
 }
