@@ -14,6 +14,7 @@ import androidx.core.view.get
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_category_list.*
 import kotlinx.android.synthetic.main.fragment_filterby_ingredient.*
 import kotlinx.android.synthetic.main.fragment_filterby_ingredient.view.*
 import kotlinx.android.synthetic.main.fragment_search_drinksby_name.*
@@ -157,7 +158,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 })
             }
             R.id.filter_category->{
-
+                val fragment = CategoryList()
+                supportFragmentManager.beginTransaction().replace(R.id.content, fragment).commit()
             }
             R.id.filter_glass->{
 
@@ -189,6 +191,41 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun getCatagoryData(view:View){
+        //filter_category_spinner
+        println("${filter_category_spinner.selectedItemPosition} was selected")
+        val term = filter_category_spinner.getItemAtPosition(filter_category_spinner.selectedItemPosition)
+        println(term)
+        if(!term.equals("") && term != null){
+            val request = Request.Builder()
+                .url("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=$term")
+                .build()
+
+            client.newCall(request).enqueue(object : okhttp3.Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    println("Something went wrong: API call failed")
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    var responseData = response.body()?.string()
+                    println(responseData)
+                    val gson = GsonBuilder().create()
+                    val feed = gson.fromJson(responseData, DrinksFeed::class.java)
+                    println(feed.toString())
+                    if(feed.drinks == null){
+                        return//Toast.makeText(this@MainActivity, "Nothing found for that search", Toast.LENGTH_LONG).show()
+                    }else{
+                        println("*********" + feed.drinks.size + "************")
+                        val fragment = IngredientsListFragment(feed.drinks)
+                        supportFragmentManager.beginTransaction().replace(R.id.filter_category_dataresults,fragment).commit()
+                    }
+
+
+                }
+            })
+        }
     }
 
     fun getRandom(view: View?){
